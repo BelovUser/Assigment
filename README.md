@@ -150,7 +150,7 @@ HAVING SUM(BALANCE.jistina) > c;
 ## 3.)
     6) Postavte dotaz, který zobrazí 10 klientů s maximální celkovou výší pohledávky (suma všech pohledávek klienta) k ultimu měsíce a tuto na konci řádku vždy zobrazte.
 ###
-Myslím si, že v zadaní byl překlep u slova "ultimu měsicu", tak jsem odvodil, že se mluvilo o minulém měsíci.
+Myslím si, že v zadaní byl překlep u slova "ultimu měsicu", tak jsem odvodil, že se mluvilo opět o konci měsíce.
 ```SQL
 SELECT KLIENT.id_klient, KLIENT.jmeno, KLIENT.prijmeni,
 SUM(BALANCE.jistina) AS CELKOVA_POHLEDAVKA
