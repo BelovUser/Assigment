@@ -19,22 +19,14 @@ public class Main {
     }
 
     private static List<String> palindromesOnly(List<String> words) {
-        List<String> palindromes = new ArrayList<>();
-        for (String word : words) {
-            if (isPalindrome(word)) {
-                palindromes.add(word);
-            }
-        }
-        return palindromes;
+        return words.stream()
+                    .filter(Main::isPalindrome)
+                    .toList();
     }
 
-    private static boolean isPalindrome(String word){
-        String lowerCaseWord = word.toLowerCase();
-        StringBuilder sb = new StringBuilder();
-        for(int i = lowerCaseWord.length() - 1; i >= 0; i--) {
-            sb.append(lowerCaseWord.charAt(i));
-        }
-        return sb.toString().equals(lowerCaseWord);
+     private static boolean isPalindrome(String word) {
+        String normalizedWord = word.toLowerCase();
+        return new StringBuilder(normalizedWord).reverse().toString().equals(normalizedWord);
     }
 
 }
