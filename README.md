@@ -1,5 +1,5 @@
 # Úkol eppTec
-_V tomto repozitáři můžete najít mnou vypracované zkušební zadání pro eppTec._
+_Mnou vypracované zkušební zadání pro eppTec._
 
 ### Zadaní
 
@@ -49,22 +49,14 @@ public class Main {
     }
 
     private static List<String> palindromesOnly(List<String> words) {
-        List<String> palindromes = new ArrayList<>();
-        for (String word : words) {
-            if (isPalindrome(word)) {
-                palindromes.add(word);
-            }
-        }
-        return palindromes;
+        return words.stream()
+                    .filter(Main::isPalindrome)
+                    .toList();
     }
 
-    private static boolean isPalindrome(String word){
-        String lowerCaseWord = word.toLowerCase();
-        StringBuilder sb = new StringBuilder();
-        for(int i = lowerCaseWord.length() - 1; i >= 0; i--) {
-            sb.append(lowerCaseWord.charAt(i));
-        }
-        return sb.toString().equals(lowerCaseWord);
+     private static boolean isPalindrome(String word) {
+        String normalizedWord = word.toLowerCase();
+        return new StringBuilder(normalizedWord).reverse().toString().equals(normalizedWord);
     }
 
 }
@@ -82,6 +74,7 @@ Metoda isPalindrome není citlivá na velikost písmen.
 ##
 ## Datový model
 Předtím, než jsem začal psát SQL queery, vytvořil jsem si pro sebe menší strukturu databáze a jak by měla vypadat.
+![DB](/Images/DB.png)
 ####
 Rozhodl jsem se zachovat názvy tabulek v češtině, jak bylo uvedeno v zadání.
 ## 1.) 
@@ -89,6 +82,11 @@ Rozhodl jsem se zachovat názvy tabulek v češtině, jak bylo uvedeno v zadán�
     2) Naznačte základní sadu atributů v jednotlivých tabulkách, kardinalitu, primární/cizí klíče, apod.
     3) V tabulce transakcí se bude vyskytovat TYP_TRANSAKCE, který bude odkazovat do číselníku typů transakcí.
     4) Předpokládejte, že tabulka BALANCE obsahuje denní snímky nesoucí informaci o výši jednotlivých komponent pohledávky (jistina, úrok, poplatky) na konci dne.
+
+Klient ↔ Účet: Jeden klient může mít více účtů (1:N).
+Účet ↔ Transakce: Jeden účet může mít více transakcí (1:N).
+Účet ↔ Balance: Jeden účet může mít více záznamů v Balance (1:N).
+Transakce ↔ TypTransakce: Každá transakce odkazuje na jeden typ v číselníku typů transakcí (N:1).
 ##
 ```SQL
 CREATE TABLE KLIENT(
