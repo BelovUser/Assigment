@@ -141,8 +141,8 @@ pokud bude potřeba změnit částku, podle které se klienti vyhledávají, pou
 ```SQL
 SELECT KLIENT.id_klient, KLIENT.jmeno, KLIENT.prijmeni
 FROM KLIENT
-JOIN UCET ON Klient.id_klient = UCET.id_klient
-JOIN BALANCE ON Ucet.id_ucet = BALANCE.id_ucet
+JOIN UCET ON KLIENT.id_klient = UCET.id_klient
+JOIN BALANCE ON UCET.id_ucet = BALANCE.id_ucet
 WHERE MONTH(BALANCE.datum) = MONTH(CURRENT_DATE())
 GROUP BY KLIENT.id_klient, KLIENT.jmeno, KLIENT.prijmeni
 HAVING SUM(BALANCE.jistina) > c;
